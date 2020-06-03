@@ -29,4 +29,37 @@ it should use today’s date to get the month and year.
 
 import sys
 import calendar
-from datetime import datetime
+from datetime import datetime, date
+
+today = datetime.today()
+
+
+def parse_input(argv):
+    month = today.month
+    year = today.year
+
+    if len(argv) == 3:
+        try:
+            year = int(argv[2])
+            month = int(argv[1])
+        except:
+            sys.exit("ERROR: please input year as a number")
+    if len(argv) == 2:
+        try:
+            month = int(argv[1])
+        except:
+            sys.exit("ERROR: please input month as a number")
+
+    return (month, year)
+
+
+month, year = parse_input(sys.argv)
+
+
+def show_cal(month=today.month, year=today.year):
+    date1 = date(year=year, month=month, day=today.day)
+
+    print(calendar.month(year, month))
+
+
+show_cal(month, year)
